@@ -1,3 +1,5 @@
+package RefereeSite;
+
 import java.util.*;
 
 public class MRefereeSite {

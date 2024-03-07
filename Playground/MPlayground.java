@@ -1,5 +1,5 @@
-import java.util.*
-;
+package Playground;
+
 public class MPlayground {
     //colocar aqui
     //gameID, matchID, 

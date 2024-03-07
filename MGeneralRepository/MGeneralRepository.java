@@ -1,4 +1,5 @@
-import java.util.*;
+package MGeneralRepository;
+
 
 public class MGeneralRepository {
     
