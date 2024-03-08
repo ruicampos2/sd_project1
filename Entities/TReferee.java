@@ -2,13 +2,13 @@ package Entities;
 
 import RefereeSite.IMRefereeSite_TReferee;
 
-public class TReferee {
+public class TReferee implements Runnable {
 
-    private final int refereeID = 1;
+    private final int refereeID;
     private final IMRefereeSite_TReferee z;
 
     private TReferee(int refereeID, IMRefereeSite_TReferee z){
-        this.refereeID = refereeID;
+        this.refereeID = 1;
         this.z = z;
     }
 

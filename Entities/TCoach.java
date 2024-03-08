@@ -1,6 +1,7 @@
 package Entities;
 
 import Bench.IMContestantsBench_TCoach;
+
 public class TCoach implements Runnable{
 
     private final int coachID;

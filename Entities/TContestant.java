@@ -2,7 +2,7 @@ package Entities;
 
 import Bench.IMContestantsBench_TContestants;
 
-public class TContestant {
+public class TContestant implements Runnable{
     private final int contestantID;
     private final IMContestantsBench_TContestants y;
 
