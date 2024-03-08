@@ -11,8 +11,8 @@ public class TContestant {
         this.y = y;
     }
 
-    public static Runnable getInstance(int contestanteID, IMContestantsBench_TContestants y){
-        return new TContestant(contestanteID, y);
+    public static Runnable getInstance(int contestantID, IMContestantsBench_TContestants y){
+        return new TContestant(contestantID, y);
     }
 
     @Override
