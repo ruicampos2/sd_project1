@@ -2,7 +2,7 @@ package Entities;
 
 import RefereeSite.IMRefereeSite_TReferee;
 
-public class TReferee implements Runnable {
+public class TReferee extends Thread {
 
     /**
      * ID of the referee.
@@ -47,10 +47,6 @@ public class TReferee implements Runnable {
      */
     public void setRefereeState(int refereeState) {
         this.refereeState = refereeState;
-    }
-
-    public static Runnable getInstance(int refereeID, IMRefereeSite_TReferee z){
-        return new TReferee(refereeID, z);
     }
 
     @Override

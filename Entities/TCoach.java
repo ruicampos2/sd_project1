@@ -2,7 +2,7 @@ package Entities;
 
 import Bench.IMContestantsBench_TCoach;
 
-public class TCoach implements Runnable{
+public class TCoach extends Thread{
 
     /**
      * ID of the coach
@@ -46,10 +46,6 @@ public class TCoach implements Runnable{
      */
     public void setCoachState(int coachState) {
         this.coachState = coachState;
-    }
-
-    public static Runnable getInstance(int coachID, IMContestantsBench_TCoach contestantsBench){
-        return new TCoach(coachID, contestantsBench);
     }
 
     @Override

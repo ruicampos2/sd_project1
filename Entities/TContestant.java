@@ -3,7 +3,7 @@ package Entities;
 import Bench.IMContestantsBench_TContestants;
 import Playground.IMPlayground_TContestants;
 
-public class TContestant implements Runnable{
+public class TContestant extends Thread{
 
     /**
      * ID of the contestant.
@@ -56,11 +56,6 @@ public class TContestant implements Runnable{
      */
     public void setContestantState(int contestantState) {
         this.contestantState = contestantState;
-    }
-
-    public static Runnable getInstance(
-            int contestantID, IMContestantsBench_TContestants contestantsBench, IMPlayground_TContestants playground) {
-        return new TContestant(contestantID, contestantsBench, playground);
     }
 
     @Override
