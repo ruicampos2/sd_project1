@@ -1,5 +1,5 @@
 package RefereeSite;
 
-public class IMRefereeSite_TCoach {
-    
+public interface IMRefereeSite_TCoach {
+    public void informReferee();   
 }
