@@ -48,8 +48,8 @@ public class TCoach implements Runnable{
         this.coachState = coachState;
     }
 
-    public static Runnable getInstance(int coachID, IMContestantsBench_TCoach x){
-        return new TCoach(coachID, x);
+    public static Runnable getInstance(int coachID, IMContestantsBench_TCoach contestantsBench){
+        return new TCoach(coachID, contestantsBench);
     }
 
     @Override
