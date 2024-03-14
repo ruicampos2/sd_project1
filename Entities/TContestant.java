@@ -21,7 +21,7 @@ public class TContestant implements Runnable{
     }
 
     public void setContestantState(int contestantState) {
-        this.coachState = contestantState;
+        this.contestantState = contestantState;
     }
 
     public static Runnable getInstance(int contestantID, IMContestantsBench_TContestants y){
