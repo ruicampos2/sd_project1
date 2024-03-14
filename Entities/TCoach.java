@@ -4,17 +4,30 @@ import Bench.IMContestantsBench_TCoach;
 
 public class TCoach implements Runnable{
 
+    /**
+     * ID of the coach
+     */
     private final int coachID;
-    private final IMContestantsBench_TCoach x;
+
+    /**
+     * Reference to contestants bench.
+     */
+    private final IMContestantsBench_TCoach contestantsBench;
 
     /**
      * Coach state.
      */
     private int coachState;
 
-    private TCoach(int coachid, IMContestantsBench_TCoach x){
-        this.coachID = coachid;
-        this.x = x;
+    /**
+     *
+     * @param coachId ID of the coach
+     * @param contestantsBench Reference to contestants bench
+     */
+    private TCoach(int coachId, IMContestantsBench_TCoach contestantsBench){
+        this.coachID = coachId;
+        this.coachState = TCoachStates.WAIT_FOR_REFEREE_COMMAND;
+        this.contestantsBench = contestantsBench;
     }
 
     /**
