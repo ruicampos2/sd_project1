@@ -1,6 +1,6 @@
 package Bench;
 
 
-public class IMContestantsBench_TContestants {
-    
+public interface IMContestantsBench_TContestants {
+    public void followCoachAdvice();
 }

@@ -41,12 +41,21 @@ public class TContestant extends Thread{
     }
 
     /**
+     * Get the ID of the Contestant.
+     *
+     * @return contestant ID
+     */
+    public int getContestantId() {
+        return this.contestantID;
+    }
+
+    /**
      * Get the state of the Contestant.
      * 
      * @return contestant state
      */
     public int getContestantState() {
-        return contestantState;
+        return this.contestantState;
     }
 
     /**
@@ -63,6 +72,17 @@ public class TContestant extends Thread{
         boolean run = true;
         while (run) {
             //complete
+            this.contestantsBench.followCoachAdvice();
+            this.playground.getReady();
+            try {
+                sleep ((long) (1 + 100 * Math.random ()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            this.playground.pullTheRope();
+            this.contestantsBench.sitDown();
+
         }
         
     }

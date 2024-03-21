@@ -1,5 +1,5 @@
 package Playground;
 
-public class IMPlayground_TContestants {
-    
+public interface IMPlayground_TContestants {
+    public void getReady();
 }
