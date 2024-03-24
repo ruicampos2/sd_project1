@@ -42,6 +42,9 @@ public class MRefereeSite {
             }
         }
 
+        TReferee refstate = (TReferee) Thread.currentThread();
+        refstate.setRefereeState(TRefereeStates.TEAMS_READY);
+
 
         notifyAll();
 
@@ -57,6 +60,9 @@ public class MRefereeSite {
                 e.printStackTrace();
             }
         }
+
+        TReferee refstate = (TReferee) Thread.currentThread();
+        refstate.setRefereeState(TRefereeStates.WAIT_FOR_TRIAL_CONCLUSION);
 
 
         notifyAll();
@@ -106,6 +112,9 @@ public class MRefereeSite {
             }
         }
 
+        TReferee refstate = (TReferee) Thread.currentThread();
+        refstate.setRefereeState(TRefereeStates.END_OF_A_GAME);
+
         while(numbertrials < 6){
             if (mark >= 4){
                 System.out.println("Team B game winner by knock out!");
@@ -143,5 +152,8 @@ public class MRefereeSite {
                 System.out.println("Team B wins the match!");
             }
         }
+
+        TReferee refstate = (TReferee) Thread.currentThread();
+        refstate.setRefereeState(TRefereeStates.END_OF_THE_MATCH);
     }
 }
