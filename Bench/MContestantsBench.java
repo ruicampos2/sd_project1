@@ -23,4 +23,16 @@ public class MContestantsBench {
 
     }
 
+    public synchronized void callContestants(){
+        //write
+    }
+
+    public synchronized void followCoachAdvice(){
+        //write
+    }
+
+    public synchronized void seatDown(){
+        //write
+    }
+
 }
