@@ -1,5 +1,5 @@
 package Playground;
 
-public class IMPlayground_TCoach {
+public interface IMPlayground_TCoach {
     
 }

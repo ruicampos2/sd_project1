@@ -11,8 +11,8 @@ public class MGeneralRepository {
      */
     private int [] contestantStates;
 
-    public MGeneralRepository () {
-        this.contestantStates = new int[SimulPar.NUMBER_OF_TEAMS];
+    public MGeneralRepository (int n_teams) {
+        this.contestantStates = new int[n_teams];
     }
 
     /**

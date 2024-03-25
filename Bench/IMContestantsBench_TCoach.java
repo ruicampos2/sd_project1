@@ -1,5 +1,5 @@
 package Bench;
 
-public class IMContestantsBench_TCoach {
+public interface IMContestantsBench_TCoach {
     
 }

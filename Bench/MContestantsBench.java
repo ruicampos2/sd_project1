@@ -1,5 +1,7 @@
 package Bench;
 
+import Entities.TContestant;
+import Entities.TContestantStates;
 import MGeneralRepository.MGeneralRepository;
 
 public class MContestantsBench {
@@ -22,5 +24,19 @@ public class MContestantsBench {
 
 
     }
+
+
+    /**
+     * Operation Follow Coach Advice.
+     *
+     *
+     */
+    public synchronized void followCoachAdvice() {
+        TContestant contestant = (TContestant) Thread.currentThread();
+        contestant.setContestantState(TContestantStates.STAND_IN_POSITION);
+        this.repos.setContestantState(contestant.getContestantId(), TContestantStates.STAND_IN_POSITION);
+    }
+
+
 
 }

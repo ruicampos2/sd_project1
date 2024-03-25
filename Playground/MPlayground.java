@@ -41,8 +41,14 @@ public class MPlayground {
 
         this.nContestantsReady++;
 
+    }
+
+    public synchronized void pullTheRope() {
+
+
 
     }
+
 
 
 
