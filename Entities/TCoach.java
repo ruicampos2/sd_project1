@@ -1,6 +1,8 @@
 package Entities;
 
 import Bench.IMContestantsBench_TCoach;
+import Playground.IMPlayground_TCoach;
+import RefereeSite.IMRefereeSite_TCoach;
 
 public class TCoach extends Thread{
 
@@ -15,6 +17,16 @@ public class TCoach extends Thread{
     private final IMContestantsBench_TCoach contestantsBench;
 
     /**
+     * Reference to Playground
+     */
+    private final IMPlayground_TCoach playground;
+
+    /**
+     * Reference to RefereeSite
+     */
+    private final IMRefereeSite_TCoach refereesite;
+
+    /**
      * Coach state.
      */
     private int coachState;
@@ -24,10 +36,12 @@ public class TCoach extends Thread{
      * @param coachId ID of the coach
      * @param contestantsBench Reference to contestants bench
      */
-    private TCoach(int coachId, IMContestantsBench_TCoach contestantsBench){
+    private TCoach(int coachId, IMContestantsBench_TCoach contestantsBench, IMPlayground_TCoach playground, IMRefereeSite_TCoach refereesite){
         this.coachID = coachId;
         this.coachState = TCoachStates.WAIT_FOR_REFEREE_COMMAND;
         this.contestantsBench = contestantsBench;
+        this.playground = playground;
+        this.refereesite = refereesite;
     }
 
     /**
@@ -48,11 +62,33 @@ public class TCoach extends Thread{
         this.coachState = coachState;
     }
 
+
+
     @Override
     public void run(){
         boolean run = true;
         while (run) {
-            //complete
+            try {
+                sleep ((long) (1 + 100 * Math.random ()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.contestantsBench.callContestants();
+
+            try {
+                sleep ((long) (1 + 100 * Math.random ()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            this.refereesite.informReferee();
+
+            try {
+                sleep ((long) (1 + 100 * Math.random ()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.playground.ReviewNotes();
         }
         
     }
