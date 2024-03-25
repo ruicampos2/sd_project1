@@ -25,18 +25,33 @@ public class MContestantsBench {
 
     }
 
+    /**
+     * Operation Call contestants.
+     *
+     * Called by Coach.
+     */
+    public synchronized void callContestants(){
+        //write
+    }
 
     /**
      * Operation Follow Coach Advice.
      *
-     *
+     * Called by contestants
      */
-    public synchronized void followCoachAdvice() {
+    public synchronized void followCoachAdvice(){
         TContestant contestant = (TContestant) Thread.currentThread();
         contestant.setContestantState(TContestantStates.STAND_IN_POSITION);
         this.repos.setContestantState(contestant.getContestantId(), TContestantStates.STAND_IN_POSITION);
     }
 
-
+    /**
+     * Operation Seat Down.
+     *
+     * Called by contestants.
+     */
+    public synchronized void seatDown(){
+        //write
+    }
 
 }

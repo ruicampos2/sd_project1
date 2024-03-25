@@ -49,6 +49,14 @@ public class MPlayground {
 
     }
 
+    public synchronized void amDone(){
+        //write
+    }
+
+    public synchronized void ReviewNotes(){
+        //write
+    }
+
 
 
 

@@ -53,9 +53,31 @@ public class TReferee extends Thread {
     public void run(){
         boolean run = true;
         while (run) {
-            //complete
-        }
+            this.refereeSite.announceNewGame();
+            this.refereeSite.callTrial();
+            
+            try {
+                sleep ((long) (1 + 100 * Math.random ()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            this.refereeSite.startTrial();
+            try {
+                sleep ((long) (1 + 100 * Math.random ()));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.refereeSite.assertTrialDecision();
+
+            this.refereeSite.declareGameWinner();
+
+            this.refereeSite.declareMatchWinner();
         
+
+
+
+        }
     }
     
 }
