@@ -45,12 +45,21 @@ public class TCoach extends Thread{
     }
 
     /**
+     * Get Coach ID.
+     *
+     * @return coach ID
+     */
+    public int getCoachID(){
+        return this.coachID;
+    }
+
+    /**
      * Get coach state.
      *
      * @return coach state
      */
     public int getCoachState() {
-        return coachState;
+        return this.coachState;
     }
 
     /**
