@@ -77,7 +77,7 @@ public class MRefereeSite {
         nplayers = teamAplayers + teamBplayers;
 
     
-        while(nplayers != 6){
+        while(nplayers != SimulPar.MAX_PLAYERS_PLAYING){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -94,8 +94,11 @@ public class MRefereeSite {
     }
 
     public synchronized void assertTrialDecision(){
-        
+        //só para fazer o codigo
+        int StrengthTeamA = 11; //soma das strengths dos contestants
+        int StrengthTeamB = 10;
         //VER COMO FAZER
+        //ir buscar as strenghts 
         //Acordar os treinadores again
         while(ncoaches != SimulPar.MAX_COACHES){
             try {
@@ -104,6 +107,15 @@ public class MRefereeSite {
                 e.printStackTrace();
             }
         }
+
+        if (StrengthTeamA > StrengthTeamB) {
+            mark--;
+        } else if (StrengthTeamA < StrengthTeamB) {
+            mark++;
+        } else {
+            // Se as forças forem iguais, mantenha o valor de mark
+        }
+        
 
 
         notifyAll();

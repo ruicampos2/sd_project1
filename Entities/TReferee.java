@@ -1,7 +1,6 @@
 package Entities;
 
 import RefereeSite.IMRefereeSite_TReferee;
-import RefereeSite.declareGameWinnerbyKnockOut;
 
 public class TReferee extends Thread {
 
