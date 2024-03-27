@@ -11,6 +11,11 @@ public class TContestant extends Thread{
     private final int contestantID;
 
     /**
+     * Strength of the Contestant
+     */
+    private final int contStrength;
+
+    /**
      * Reference to the contestants bench.
      */
     private final IMContestantsBench_TContestants contestantsBench;
@@ -31,13 +36,13 @@ public class TContestant extends Thread{
      * @param contestantsBench Reference to the contestants bench
      * @param playground Reference to the playground
      */
-    private TContestant(int contestantID,
+    private TContestant(int contestantID, int contStrength,
                         IMContestantsBench_TContestants contestantsBench, IMPlayground_TContestants playground){
         this.contestantID = contestantID;
+        this.contStrength = contStrength;
         this.contestantsBench = contestantsBench;
         this.playground = playground;
         this.contestantState = TContestantStates.SEAT_AT_BENCH;
-
     }
 
     /**
@@ -67,6 +72,11 @@ public class TContestant extends Thread{
         this.contestantState = contestantState;
     }
 
+    public int getContestantStrength()
+    {
+        return contStrength;
+    }
+
     @Override
     public void run(){
         boolean run = true;
@@ -81,6 +91,7 @@ public class TContestant extends Thread{
             }
 
             this.playground.pullTheRope();
+            this.playground.amDone();
             this.contestantsBench.sitDown();
 
         }

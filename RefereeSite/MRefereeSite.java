@@ -1,7 +1,10 @@
 package RefereeSite;
 
+import Entities.TCoach;
+import Entities.TCoachStates;
 import Entities.TReferee;
 import Entities.TRefereeStates;
+import Main.SimulPar;
 
 public class MRefereeSite {
 
@@ -27,14 +30,14 @@ public class MRefereeSite {
         refstate.setRefereeState(TRefereeStates.START_OF_A_GAME);
 
 
-        
+    
     }
 
     public synchronized void callTrial() {
         System.out.println("WAITING FOR TEAMS READY");
 
         //COLOCAR teams ready
-        while(ncoaches != 2){
+        while(ncoaches != SimulPar.MAX_COACHES){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -68,10 +71,12 @@ public class MRefereeSite {
         notifyAll();
     }
 
-    public synchronized void informReferee(){
+    public synchronized void informReferee(int coachID, int teamAplayers, int teamBplayers){
         //questão porque não sei se deverá ser !=6 ou !=3 porque é cada treinador
-        System.out.println("Teams made by the coachs");
+        
+        nplayers = teamAplayers + teamBplayers;
 
+    
         while(nplayers != 6){
             try {
                 wait();
@@ -79,6 +84,12 @@ public class MRefereeSite {
                 e.printStackTrace();
             }
         }
+
+        System.out.println("Teams made by the coaches");
+
+        TCoach coachstate = (TCoach) Thread.currentThread();
+        coachstate.setCoachState(TCoachStates.WATCH_TRIAL);
+
         notifyAll();
     }
 
@@ -86,7 +97,7 @@ public class MRefereeSite {
         
         //VER COMO FAZER
         //Acordar os treinadores again
-        while(ncoaches != 2){
+        while(ncoaches != SimulPar.MAX_COACHES){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -117,11 +128,11 @@ public class MRefereeSite {
 
         while(numbertrials < 6){
             if (mark >= 4){
-                System.out.println("Team B game winner by knock out!");
+                System.out.println("Team B is the game winner by knock out!");
                 TeamBpoints++;
             }
             else if (mark <= -4) {
-                System.out.println("Team A game winner by knock out!");
+                System.out.println("Team A is the game winner by knock out!");
                 TeamApoints++;
             }
         }
@@ -144,14 +155,13 @@ public class MRefereeSite {
     }
 
     public synchronized void declareMatchWinner(){
-        if (numbergames == 3){
-            if (TeamApoints > TeamBpoints){
-                System.out.println("Team A wins the match!");
-            }
-            else {
-                System.out.println("Team B wins the match!");
-            }
+        if (TeamApoints > TeamBpoints){
+            System.out.println("Team A wins the match!");
         }
+        else {
+            System.out.println("Team B wins the match!");
+        }
+        
 
         TReferee refstate = (TReferee) Thread.currentThread();
         refstate.setRefereeState(TRefereeStates.END_OF_THE_MATCH);

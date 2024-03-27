@@ -1,6 +1,7 @@
 package Entities;
 
 import Bench.IMContestantsBench_TCoach;
+import Bench.MContestantsBench;
 import Playground.IMPlayground_TCoach;
 import RefereeSite.IMRefereeSite_TCoach;
 
@@ -90,13 +91,14 @@ public class TCoach extends Thread{
                 e.printStackTrace();
             }
 
-            this.refereesite.informReferee();
+            this.refereesite.informReferee(coachID, MContestantsBench.getPlayersteamA(), MContestantsBench.getPlayersteamB);
 
             try {
                 sleep ((long) (1 + 100 * Math.random ()));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
             this.playground.ReviewNotes();
         }
         

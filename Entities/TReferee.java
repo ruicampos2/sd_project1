@@ -51,33 +51,28 @@ public class TReferee extends Thread {
 
     @Override
     public void run(){
-        boolean run = true;
-        while (run) {
-            this.refereeSite.announceNewGame();
-            this.refereeSite.callTrial();
-            
-            try {
-                sleep ((long) (1 + 100 * Math.random ()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            this.refereeSite.startTrial();
-            try {
-                sleep ((long) (1 + 100 * Math.random ()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            this.refereeSite.assertTrialDecision();
-
-            this.refereeSite.declareGameWinner();
-
-            this.refereeSite.declareMatchWinner();
+        int numbertrials;
+        int numbergames = 0;
         
-
-
-
-        }
-    }
+        // Loop enquanto o número de jogos não for igual a 3
+        while (numbergames != 3) {
+            this.refereeSite.announceNewGame();
+            numbertrials = 0;
+            
+            // Loop para realizar até 6 trials
+            while (numbertrials < 6) {
+                this.refereeSite.callTrial();
+                this.refereeSite.startTrial();
+                numbertrials++;
+                this.refereeSite.assertTrialDecision();
+            }
     
+            // Após 6 trials, declarar o vencedor do jogo
+            this.refereeSite.declareGameWinner();
+            numbergames++;
+        }
+    
+        // Após o número de jogos atingir 3, declarar o vencedor da partida
+        this.refereeSite.declareMatchWinner();
+    }
 }
