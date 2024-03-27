@@ -125,7 +125,7 @@ public class MRefereeSite {
 
         //knockout = false;
 
-        while(numbertrials < 6){
+        while(numbertrials <= 6){
             if (mark >= 4){
                 System.out.println("Team B is the game winner by knock out!");
                 TeamBpoints++;
