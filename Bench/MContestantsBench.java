@@ -5,6 +5,9 @@ import Entities.TCoachStates;
 import Entities.TContestant;
 import Entities.TContestantStates;
 import MGeneralRepository.MGeneralRepository;
+import Main.SimulPar;
+
+import java.util.Arrays;
 
 public class MContestantsBench {
     /**
@@ -19,13 +22,25 @@ public class MContestantsBench {
     private boolean contestantChosenForTrial[];
 
     /**
-     * Instantiantion of the contestants bench.
+     * Array that saves each contestants strength.
+     * Indexed by contestant ID.
+     */
+    private int contestantStrength[];
+
+    /**
+     * Instantiation of the contestants bench.
      *
      * @param repos Reference to general repository
+     * @param initialStrength Each player's initial strength value. Has to be higher than 0.
      */
-    public MContestantsBench(MGeneralRepository repos, int n_teams, int n_players) {
+    public MContestantsBench(MGeneralRepository repos, int initialStrength) {
         this.repos = repos;
-        this.contestantChosenForTrial = new boolean[n_teams * n_players];
+        this.contestantChosenForTrial = new boolean[SimulPar.NUMBER_OF_TEAMS * SimulPar.NUMBER_OF_PLAYERS];
+
+        this.contestantStrength = new int[SimulPar.NUMBER_OF_TEAMS * SimulPar.NUMBER_OF_PLAYERS];
+        if (initialStrength <= 0) throw new IllegalArgumentException("Parameter initialStrength has to be higher than 0.");
+        for (int i = 0; i < contestantStrength.length; i++)
+            contestantStrength[i] = initialStrength;
     }
 
     /**
@@ -38,7 +53,32 @@ public class MContestantsBench {
         coach.setCoachState(TCoachStates.ASSEMBLE_TEAM);
         this.repos.setCoachState(coach.getCoachID(), TCoachStates.ASSEMBLE_TEAM);
 
-        //TODO: algorithm that choses which contestants will play.
+        // TODO: might need more testing and better code...
+        int i = coach.getCoachID() * SimulPar.NUMBER_OF_PLAYERS;
+        int min = this.contestantStrength[i];
+        int minIdx = i;
+        for (; i < (coach.getCoachID() + 1 ) * SimulPar.NUMBER_OF_PLAYERS; i++) {
+            if (i < SimulPar.NUMBER_OF_PLAYERS_IN_TRIAL) {
+                this.contestantChosenForTrial[i] = true;
+                if (min > this.contestantStrength[i]) {
+                    min = this.contestantStrength[i];
+                    minIdx = i;
+                }
+            } else if (this.contestantStrength[i] > min) {
+                this.contestantChosenForTrial[minIdx] = false;
+                this.contestantChosenForTrial[i] = true;
+
+                /* find new minimum */
+                boolean flag = false;
+                for (int j = 0; j < (coach.getCoachID() + 1 ) * SimulPar.NUMBER_OF_PLAYERS; j++) {
+                    if ( this.contestantChosenForTrial[j] && (this.contestantStrength[j] < min || !flag) ){
+                        min = this.contestantStrength[j];
+                        minIdx = j;
+                        flag = true;
+                    }
+                }
+            }
+        }
 
         /* notifies his team that are in "SEAT_AT_THE_BENCH" state*/
         notifyAll();
@@ -54,7 +94,7 @@ public class MContestantsBench {
         contestant.setContestantState(TContestantStates.SEAT_AT_BENCH);
         this.repos.setContestantState(contestant.getContestantId(), TContestantStates.SEAT_AT_BENCH);
 
-        while (this.contestantChosenForTrial[contestant.getContestantId()]) {
+        while (!this.contestantChosenForTrial[contestant.getContestantId()]) {
             try {
                 wait();
             } catch (InterruptedException e) {

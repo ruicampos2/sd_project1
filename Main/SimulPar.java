@@ -12,6 +12,9 @@ public final class SimulPar {
      */
     public static final int NUMBER_OF_PLAYERS = 5;
 
-
+    /**
+     * Number of players that participate in a trial.
+     */
+    public static final int NUMBER_OF_PLAYERS_IN_TRIAL = 3;
 
 }
