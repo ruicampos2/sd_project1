@@ -37,7 +37,7 @@ public class TCoach extends Thread{
      * @param coachId ID of the coach
      * @param contestantsBench Reference to contestants bench
      */
-    private TCoach(int coachId, IMContestantsBench_TCoach contestantsBench, IMPlayground_TCoach playground, IMRefereeSite_TCoach refereesite){
+    public TCoach(int coachId, IMContestantsBench_TCoach contestantsBench, IMPlayground_TCoach playground, IMRefereeSite_TCoach refereesite){
         this.coachID = coachId;
         this.coachState = TCoachStates.WAIT_FOR_REFEREE_COMMAND;
         this.contestantsBench = contestantsBench;

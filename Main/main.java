@@ -29,6 +29,9 @@ public class main {
         MPlayground playground;
         MContestantsBench bench;
         IMRefereeSite_TReferee referee_site;
+        IMRefereeSite_TCoach refereeSite_TCoach;
+        IMPlayground_TCoach playground_TCoach;
+        IMContestantsBench_TCoach contestantsBench_TCoach;
 
 
         int[] teamA_ids = new int[5];
@@ -51,7 +54,7 @@ public class main {
         
 
         for (int i = 0; i < SimulPar.MAX_COACHES; i++) {
-            coach[i] = new TCoach(i, bench, playground, referee_site);
+            coach[i] = new TCoach(i, contestantsBench_TCoach, playground_TCoach, refereeSite_TCoach);
         }
 
         for (int i = 0; i < SimulPar.MAX_CONTESTANTS; i++) {
