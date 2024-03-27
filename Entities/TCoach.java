@@ -91,7 +91,8 @@ public class TCoach extends Thread{
                 e.printStackTrace();
             }
 
-            this.refereesite.informReferee(coachID, MContestantsBench.getPlayersteamA(), MContestantsBench.getPlayersteamB);
+            this.refereesite.informReferee(coachID, MContestantsBench.contestantChosenForTrial(), MContestantsBench.getPlayersteamB);
+                                                //VER COMO CHAMAR OS CONTESTANTS
 
             try {
                 sleep ((long) (1 + 100 * Math.random ()));
