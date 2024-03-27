@@ -1,6 +1,7 @@
 package Entities;
 
 import RefereeSite.IMRefereeSite_TReferee;
+import RefereeSite.declareGameWinnerbyKnockOut;
 
 public class TReferee extends Thread {
 
@@ -25,7 +26,7 @@ public class TReferee extends Thread {
      * @param refereeID ID of the Referee
      * @param refereeSite Reference to the Referee Site
      */
-    private TReferee(int refereeID, IMRefereeSite_TReferee refereeSite){
+    public TReferee(int refereeID, IMRefereeSite_TReferee refereeSite){
         this.refereeID = 1;
         this.refereeSite = refereeSite;
         this.refereeState = TRefereeStates.START_OF_THE_MATCH;
@@ -53,14 +54,16 @@ public class TReferee extends Thread {
     public void run(){
         int numbertrials;
         int numbergames = 0;
+
         
         // Loop enquanto o número de jogos não for igual a 3
         while (numbergames != 3) {
             this.refereeSite.announceNewGame();
             numbertrials = 0;
+            boolean knockout = false;
             
             // Loop para realizar até 6 trials
-            while (numbertrials < 6) {
+            while (numbertrials < 6 && knockout != true) {
                 this.refereeSite.callTrial();
                 this.refereeSite.startTrial();
                 numbertrials++;
@@ -75,4 +78,5 @@ public class TReferee extends Thread {
         // Após o número de jogos atingir 3, declarar o vencedor da partida
         this.refereeSite.declareMatchWinner();
     }
+
 }

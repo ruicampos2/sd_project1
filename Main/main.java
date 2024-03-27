@@ -28,6 +28,7 @@ public class main {
         boolean success; // end of operation flag
         MPlayground playground;
         MContestantsBench bench;
+        IMRefereeSite_TReferee referee_site;
 
 
         int[] teamA_ids = new int[5];
@@ -40,8 +41,10 @@ public class main {
                     * (SimulPar.MAX_CONTESTANT_STRENGTH - SimulPar.MIN_CONTESTANT_STRENGTH + 1))
                     + SimulPar.MIN_CONTESTANT_STRENGTH;
         }
-        MRefereeSite referee_site = new MRefereeSite();
+
+        // Criando uma instância do TReferee
         referee = new TReferee(1, referee_site);
+
         playground = new MPlayground(contestant, referee);
         bench = new MContestantsBench(coach, contestant, teamA_ids, teamB_ids);//VER
 
