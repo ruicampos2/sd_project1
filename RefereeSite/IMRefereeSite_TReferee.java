@@ -10,7 +10,7 @@ public interface IMRefereeSite_TReferee {
 
     public void assertTrialDecision();
     
-    public void declareGameWinner();        
+    public void declareGameWinner(int numbergames);        
     
     public void declareMatchWinner();
     

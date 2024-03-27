@@ -111,7 +111,7 @@ public class MRefereeSite {
     }
     
 
-    public synchronized void declareGameWinner(){
+    public synchronized void declareGameWinner(int numbergames){
         //-6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6
         //CAMPO DE JOGO
         //Se numero for negativo, ganha equipa A, positivo equipa B
@@ -123,8 +123,6 @@ public class MRefereeSite {
             }
         }
 
-        TReferee refstate = (TReferee) Thread.currentThread();
-        refstate.setRefereeState(TRefereeStates.END_OF_A_GAME);
 
         while(numbertrials < 6){
             if (mark >= 4){
@@ -149,6 +147,15 @@ public class MRefereeSite {
                 System.out.println("Team A is the game winner!");
                 TeamApoints++;
             }
+        }
+
+        if (numbergames == 3){
+            TReferee refstate = (TReferee) Thread.currentThread();
+            refstate.setRefereeState(TRefereeStates.END_OF_A_GAME);
+        }
+        else {
+            TReferee refstate = (TReferee) Thread.currentThread();
+            refstate.setRefereeState(TRefereeStates.START_OF_A_GAME);
         }
 
         notifyAll();

@@ -68,7 +68,7 @@ public class TReferee extends Thread {
             }
     
             // Após 6 trials, declarar o vencedor do jogo
-            this.refereeSite.declareGameWinner();
+            this.refereeSite.declareGameWinner(numbergames);
             numbergames++;
         }
     
