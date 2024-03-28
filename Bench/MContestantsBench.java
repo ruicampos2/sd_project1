@@ -17,13 +17,18 @@ public class MContestantsBench {
      * Array that saves which contestants will participate in the trial.
      * Indexed by contestant ID. True means they will play, False means they won't.
      */
-    private boolean contestantChosenForTrial[];
+    private boolean [] contestantChosenForTrial;
 
     /**
      * Array that saves each contestants strength.
      * Indexed by contestant ID.
      */
-    private int contestantStrength[];
+    private int [] contestantStrength;
+
+    /**
+     * Number of players in position per team.
+     */
+    private int [] nPlayersInPosition;
 
     /**
      * Instantiation of the contestants bench.
@@ -39,6 +44,8 @@ public class MContestantsBench {
         if (initialStrength <= 0) throw new IllegalArgumentException("Parameter initialStrength has to be higher than 0.");
         for (int i = 0; i < contestantStrength.length; i++)
             contestantStrength[i] = initialStrength;
+
+        this.nPlayersInPosition = new int[SimulPar.NUMBER_OF_TEAMS];
     }
 
     /**
@@ -51,7 +58,7 @@ public class MContestantsBench {
         coach.setCoachState(TCoachStates.ASSEMBLE_TEAM);
         this.repos.setCoachState(coach.getCoachID(), TCoachStates.ASSEMBLE_TEAM);
 
-        /** Algorithm that finds strongest contestants */
+        /* Algorithm that finds strongest contestants */
         // TODO: might need more testing and better code...
         int i = coach.getCoachID() * SimulPar.NUMBER_OF_PLAYERS;
         int min = this.contestantStrength[i];
@@ -79,10 +86,26 @@ public class MContestantsBench {
             }
         }
 
+        /* Updates each contestanst's strength */
+        for (i = 0; i < this.contestantStrength.length; i++) {
+            if (this.contestantChosenForTrial[i]) {
+                this.contestantStrength[i]--;
+            } else {
+                this.contestantStrength[i]++;
+            }
+        }
+
         /* notifies his team that are in "SEAT_AT_THE_BENCH" state*/
         notifyAll();
 
-        //TODO blocks here
+        /* Blocks while all contestants get ready */
+        while (this.nPlayersInPosition[coach.getCoachID()] < SimulPar.NUMBER_OF_PLAYERS) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -101,9 +124,7 @@ public class MContestantsBench {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 
     /**
@@ -118,7 +139,22 @@ public class MContestantsBench {
         int contestantID = contestant.getContestantID();
         this.repos.setContestantState(contestantID, TContestantStates.STAND_IN_POSITION);
 
-        this.contestantStrength[contestantID]++;
+        this.nPlayersInPosition[contestantID / SimulPar.NUMBER_OF_PLAYERS]++;
+
+        /* notifies coach in "ASSEMBLE_TEAM" state */
+        notifyAll();
+
+        //TODO needs to be waken up by startTrial from referee!!
+        /*
+        while () {
+
+            try{
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
+
     }
 
 }

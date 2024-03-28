@@ -113,17 +113,13 @@ public class TContestant extends Thread{
     public void run(){
         boolean run = true;
         while (run) {
-            //complete
+
             this.contestantsBench.followCoachAdvice();
             this.playground.getReady();
-            try {
-                sleep ((long) (1 + 100 * Math.random ()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
-            this.playground.pullTheRope();
-            this.playground.amDone();
+            this.playground.pullTheRope(); //random sleep
+            this.playground.amDone(); //blocks here??
+
             this.contestantsBench.sitDown();
 
         }
