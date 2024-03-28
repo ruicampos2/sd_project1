@@ -4,12 +4,8 @@ import Entities.*;
 import RefereeSite.*;
 import Bench.*;
 import Playground.*;
-import MGeneralRepository.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.io.File;
 
 public class main {
 
@@ -60,9 +56,9 @@ public class main {
         for (int i = 0; i < SimulPar.MAX_CONTESTANTS; i++) {
             contestant[i] = new TContestant(i, contestantStrength[i], bench, playground);
             if(i < 5){
-                teamA_ids[i] = contestant[i].getContestantId();
+                teamA_ids[i] = contestant[i].getContestantID();
             }else{
-                teamB_ids[i-5] = contestant[i].getContestantId();
+                teamB_ids[i-5] = contestant[i].getContestantID();
             }
         }
 

@@ -37,7 +37,7 @@ public class MPlayground {
     public synchronized void getReady(){
         TContestant contestant = (TContestant) Thread.currentThread();
         contestant.setContestantState(TContestantStates.DO_YOUR_BEST);
-        this.repos.setContestantState(contestant.getContestantId(), TContestantStates.DO_YOUR_BEST);
+        this.repos.setContestantState(contestant.getContestantID(), TContestantStates.DO_YOUR_BEST);
 
         this.nContestantsReady++;
 

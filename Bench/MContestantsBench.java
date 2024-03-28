@@ -7,8 +7,6 @@ import Entities.TContestantStates;
 import MGeneralRepository.MGeneralRepository;
 import Main.SimulPar;
 
-import java.util.Arrays;
-
 public class MContestantsBench {
     /**
      * Reference to the general repository of information.
@@ -53,6 +51,7 @@ public class MContestantsBench {
         coach.setCoachState(TCoachStates.ASSEMBLE_TEAM);
         this.repos.setCoachState(coach.getCoachID(), TCoachStates.ASSEMBLE_TEAM);
 
+        /** Algorithm that finds strongest contestants */
         // TODO: might need more testing and better code...
         int i = coach.getCoachID() * SimulPar.NUMBER_OF_PLAYERS;
         int min = this.contestantStrength[i];
@@ -82,6 +81,8 @@ public class MContestantsBench {
 
         /* notifies his team that are in "SEAT_AT_THE_BENCH" state*/
         notifyAll();
+
+        //TODO blocks here
     }
 
     /**
@@ -92,9 +93,9 @@ public class MContestantsBench {
     public synchronized void seatDown(){
         TContestant contestant = (TContestant) Thread.currentThread();
         contestant.setContestantState(TContestantStates.SEAT_AT_BENCH);
-        this.repos.setContestantState(contestant.getContestantId(), TContestantStates.SEAT_AT_BENCH);
+        this.repos.setContestantState(contestant.getContestantID(), TContestantStates.SEAT_AT_BENCH);
 
-        while (!this.contestantChosenForTrial[contestant.getContestantId()]) {
+        while (!this.contestantChosenForTrial[contestant.getContestantID()]) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -113,7 +114,11 @@ public class MContestantsBench {
     public synchronized void followCoachAdvice(){
         TContestant contestant = (TContestant) Thread.currentThread();
         contestant.setContestantState(TContestantStates.STAND_IN_POSITION);
-        this.repos.setContestantState(contestant.getContestantId(), TContestantStates.STAND_IN_POSITION);
+
+        int contestantID = contestant.getContestantID();
+        this.repos.setContestantState(contestantID, TContestantStates.STAND_IN_POSITION);
+
+        this.contestantStrength[contestantID]++;
     }
 
 }
